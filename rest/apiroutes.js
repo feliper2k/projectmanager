@@ -18,7 +18,7 @@ apiRoutes.use(function authentication(req, res, next) {
         .catch((error) => {
             res.status(403).send({
                 success: false,
-                message: 'Invalid token provided.'
+                message: error.message
             });
         });
     }

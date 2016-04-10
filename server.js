@@ -1,8 +1,11 @@
 'use strict';
 
+const SERVER_PORT = 8001;
+
 const bodyParser = require('body-parser');
 const express = require('express');
 const jwt = require('jsonwebtoken');
+const open = require('open');
 
 const app = express();
 const apiRoutes = require('./rest/apiroutes');
@@ -31,6 +34,10 @@ app.post('/auth', function (req, res) {
 // REST endpoints
 app.use('/api', apiRoutes);
 
-app.listen(8001);
+// serve build
+app.use(express.static('build'));
 
-console.log('App listening at :8001');
+app.listen(SERVER_PORT, () => {
+    open(`http://localhost:${SERVER_PORT}/`);
+    console.log(`App listening at :${SERVER_PORT}`);
+});
