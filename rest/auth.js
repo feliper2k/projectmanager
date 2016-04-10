@@ -1,10 +1,12 @@
 'use strict';
 
+const TOKEN_LIFETIME = '3h';
+const secret = '032564cb521ded5193ae5d02f435088c';  // we would, of course, keep it somewhere safer in the production
+
 const crypto = require('crypto');
 const CRUD = require('./crud');
 const mysql = require('promise-mysql');
 const jwt = require('jsonwebtoken');
-const secret = '032564cb521ded5193ae5d02f435088c';
 
 function getToken(inputData) {
     const hash = crypto.createHash('sha256');
@@ -23,11 +25,12 @@ function getToken(inputData) {
             if(correctLogin) {
                 const payload = {
                     name: user.displayname,
+                    userid: user.id,
                     admin: user.admin
                 };
 
                 const token = jwt.sign(payload, secret, {
-                    expiresIn: '24 hours'
+                    expiresIn: TOKEN_LIFETIME
                 });
 
                 return Promise.resolve(token);

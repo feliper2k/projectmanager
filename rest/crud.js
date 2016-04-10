@@ -1,6 +1,7 @@
 'use strict';
 
 var connection = require('./connection');
+var mysql = require('promise-mysql');
 
 function CRUD(tableName) {
     function query(string, options) {
@@ -14,21 +15,24 @@ function CRUD(tableName) {
     }
 
     function update(item) {
+        item.id = parseInt(item.id);
         return query(`UPDATE ${tableName} SET ? WHERE id=${item.id}`, item);
     }
 
     function deleteId(itemId) {
+        itemId = parseInt(itemId);
         return query(`DELETE FROM ${tableName} WHERE id=${itemId}`);
     }
 
     function findById(itemId) {
         // reduce the array before handing the items over
+        itemId = parseInt(itemId);
         return query(`SELECT * FROM ${tableName} WHERE id=${itemId}`)
         .then((matches) => matches[0]);
     }
 
     function find(conditions, limit) {
-        const rowLimit = limit ? ` LIMIT ${limit}` : ``;
+        const rowLimit = limit ? ` LIMIT ${parseInt(limit)}` : ``;
 
         if(conditions) {
             let constraint = conditions.join(' AND ');
