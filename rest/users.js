@@ -41,7 +41,8 @@ function hashGenerator(password) {
 function createUser(req, res) {
     const newUser = _.assign({
         name: req.body.userName,
-        displayname: req.body.displayName
+        displayname: req.body.displayName,
+        admin: req.body.isAdmin ? 1 : 0
     }, hashGenerator(req.body.userPass));
 
     return Users.create(newUser)
@@ -50,11 +51,11 @@ function createUser(req, res) {
 }
 
 function updateUser(req, res) {
-    const resourceId = req.params.id;
+    const resourceId = req.params.id || req.body.id;
     const updatesSelf = req.token.userid === parseInt(resourceId);
     let patch = {
         id: resourceId,
-        displayname: req.body.displayName
+        displayname: req.body.displayName || req.body.displayname,
     };
 
     if(updatesSelf || req.token.admin) {
@@ -67,7 +68,7 @@ function updateUser(req, res) {
         }
 
         // only admins can grant or revoke admin status
-        if(req.body.admin && req.token.admin) {
+        if(!_.isUndefined(req.body.admin) && req.token.admin) {
             patch.admin = req.body.admin;
         }
 
@@ -85,8 +86,8 @@ function updateUser(req, res) {
 
 function deleteUser(req, res) {
     if(req.token.admin) {
-        Users.delete(req.body.id)
-        .then((updated) => res.json(updated))
+        Users.deleteId(req.params.id)
+        .then((deleted) => res.json(deleted))
         .catch((error) => res.json(error));
     }
     else {

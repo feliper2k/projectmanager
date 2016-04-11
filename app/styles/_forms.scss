@@ -1,0 +1,21 @@
+@import 'vars';
+
+input[type="text"],
+input[type="password"]
+{
+    // @extend .form-control;
+}
+
+input[type="button"],
+input[type="submit"],
+button {
+    // @extend .btn;
+}
+
+button.icon-button {
+    border: 0; outline: 0; cursor: pointer;
+}
+
+label {
+    @extend .control-label;
+}

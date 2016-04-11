@@ -10,10 +10,12 @@ export default {
   buildDir: './build/',
 
   styles: {
-    src: 'app/styles/**/*.scss',
+    src: ['app/styles/**/*.scss'],
     dest: 'build/css',
     prodSourcemap: false,
-    sassIncludePaths: []
+    sassIncludePaths: [
+        'node_modules/bootstrap-sass/assets/stylesheets/'
+    ]
   },
 
   scripts: {
