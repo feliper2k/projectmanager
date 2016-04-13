@@ -10,11 +10,23 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $httpPr
         templateUrl: 'login.html',
         title: 'Zaloguj się'
     })
-    .state('UsersList', {
+    .state('UsersMgmt', {
         url: '/manage/users',
         controller: 'UserViewCtrl as users',
         templateUrl: 'users.html',
         title: 'Zarządzaj użytkownikami'
+    })
+    .state('ProjectsMgmt', {
+        url: '/manage/projects',
+        controller: 'ProjectsViewCtrl as projects',
+        templateUrl: 'projects.html',
+        title: 'Zarządzaj projektami'
+    })
+    .state('Chat', {
+        url: '/chat',
+        controller: 'ProjectsViewCtrl as chat',
+        templateUrl: 'chat.html',
+        title: 'Chat'
     });
 
     $urlRouterProvider.otherwise('/manage/users');

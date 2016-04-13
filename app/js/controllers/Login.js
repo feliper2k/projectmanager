@@ -11,7 +11,7 @@ function LoginCtrl(LoginService, $state) {
     vm.signIn = function() {
         LoginService.signIn(vm.data)
         .then((payload) => {
-            $state.go('UsersList');
+            $state.go('UsersMgmt');
         })
         .catch((error) => {
             vm.error = error;

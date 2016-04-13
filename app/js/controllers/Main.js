@@ -5,6 +5,7 @@ function MainCtrl(LoginService) {
     const vm = this;
 
     vm.login = LoginService;
+    vm.tokenData = LoginService.tokenData;
 }
 
 export default {

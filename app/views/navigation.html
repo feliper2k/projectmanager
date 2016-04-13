@@ -1,0 +1,10 @@
+<div class="container" ng-controller="NavigationViewCtrl as nav">
+    <ul>
+        <li ng-repeat="menuItem in nav.menu">
+            <a ui-sref="{{ menuItem.targetState }}" ui-sref-active="active">
+                <i class="fa fa-{{ menuItem.icon }}" ng-if="menuItem.icon"></i>
+                <span>{{ menuItem.label }}</span>
+            </a>
+        </li>
+    </ul>
+</div>

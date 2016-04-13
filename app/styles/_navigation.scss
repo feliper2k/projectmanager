@@ -1,0 +1,32 @@
+.nav__top {
+    background: #fafafa;
+    padding: 20px;
+    margin-bottom: 20px;
+
+    ul {
+        display: flex;
+        align-items: stretch;
+        list-style-type: none;
+        padding-left: 0;
+        margin-bottom: -2px;
+    }
+
+    li {
+
+    }
+
+    a {
+        padding: 20px;
+        flex: 0 0 auto;
+
+        &.active {
+            font-weight: 700;
+            background: #eee;
+            border-bottom: solid 3px $brand-primary;
+        }
+
+        i {
+            margin-left: 10px;
+        }
+    }
+}

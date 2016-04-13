@@ -1,8 +1,9 @@
+<nav ng-include="'navigation.html'" class="nav__top"></nav>
 <div class="container view__users">
     <div class="row text-right">
         <button class="btn btn-default" ng-click="main.login.signOut()">Wyloguj</button>
     </div>
-    
+
     <h2>Użytkownicy</h2>
     <!-- <ul>
         <li ng-repeat="user in users.list">{{ user.displayname }}</li>
@@ -20,23 +21,24 @@
             </td>
             <td>{{ user.joined | date:'dd/MM/yyyy HH:mm' }}</td>
             <td>
-                <input type="checkbox" ng-model="user.admin" ng-true-value="1" ng-false-value="0">
+                <input type="checkbox" ng-model="user.admin" ng-true-value="1" ng-false-value="0"
+                ng-disabled="!main.tokenData().admin">
             </td>
             <td>
-                <button class="icon-button" ng-click="users.actions.remove(user.id)">
-                    <i class="fa fa-times"></i> Usuń
-                </button>
-                <button class="icon-button" ng-click="users.actions.save(user.id)">
+                <button class="btn btn-default" ng-click="users.actions.save(user.id)">
                     <i class="fa fa-check"></i> Zapisz
+                </button>
+                <button class="btn btn-danger" ng-click="users.actions.remove(user.id)" ng-disabled="!main.tokenData().admin">
+                    <i class="fa fa-times"></i> Usuń
                 </button>
             </td>
         </tr>
     </table>
-    <div class="row">
+    <div>
         <button class="btn" ng-click="users.addForm.visible = !users.addForm.visible"
         ng-class="{ 'btn-default': users.addForm.visible, 'btn-primary': !users.addForm.visible }">Dodaj użytkownika</button>
     </div>
-    <div class="row" ng-if="users.addForm.visible">
+    <div ng-if="users.addForm.visible">
         <form ng-submit="users.actions.add()" class="form-inline form-add-user">
             <div class="form-group">
                 <input type="text" ng-model="users.newUser.userName" placeholder="Login" class="form-control">
