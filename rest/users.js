@@ -1,12 +1,14 @@
 'use strict';
 
 const CRUD = require('./crud');
+const MESSAGES = require('./utils').MESSAGES;
+
 const Users = CRUD('users');
 const _ = require('lodash');
 const crypto = require('crypto');
 
 function getUserCollection(req, res) {
-    const limit = req.query.limit || null;
+    const limit = req.query.limit;
 
     Users.find(null, limit).then((matches) => {
         // filter out some unneeded information such as users' crypto stuff
@@ -77,10 +79,7 @@ function updateUser(req, res) {
         .catch((error) => res.json(error));
     }
     else {
-        res.status(403).send({
-            success: false,
-            message: 'Administrator rights needed.'
-        });
+        res.status(403).send(MESSAGES.NOADMIN);
     }
 }
 
@@ -91,10 +90,7 @@ function deleteUser(req, res) {
         .catch((error) => res.json(error));
     }
     else {
-        res.status(403).send({
-            success: false,
-            message: 'Administrator rights needed.'
-        });
+        res.status(403).send(MESSAGES.NOADMIN);
     }
 }
 

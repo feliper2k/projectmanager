@@ -16,11 +16,17 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $httpPr
         templateUrl: 'users.html',
         title: 'Zarządzaj użytkownikami'
     })
-    .state('ProjectsMgmt', {
+    .state('ProjectsList', {
         url: '/manage/projects',
         controller: 'ProjectsViewCtrl as projects',
-        templateUrl: 'projects.html',
+        templateUrl: 'projects-list.html',
         title: 'Zarządzaj projektami'
+    })
+    .state('ProjectsSingle', {
+        url: '/manage/projects/:id',
+        controller: 'ProjectsSingleCtrl as project',
+        templateUrl: 'projects-single.html',
+        title: 'Edytuj projekt'
     })
     .state('Chat', {
         url: '/chat',

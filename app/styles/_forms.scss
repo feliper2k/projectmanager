@@ -19,3 +19,7 @@ button.icon-button {
 label {
     @extend .control-label;
 }
+
+.ng-invalid {
+    @extend input:invalid;
+}

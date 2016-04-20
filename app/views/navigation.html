@@ -2,8 +2,12 @@
     <ul>
         <li ng-repeat="menuItem in nav.menu">
             <a ui-sref="{{ menuItem.targetState }}" ui-sref-active="active">
-                <i class="fa fa-{{ menuItem.icon }}" ng-if="menuItem.icon"></i>
-                <span>{{ menuItem.label }}</span>
+                <i class="fa fa-{{ menuItem.icon }}" ng-if="menuItem.icon"></i><span>{{ menuItem.label }}</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" ng-click="main.login.signOut()" class="logout">
+                <i class="fa fa-sign-out"></i><span>Wyloguj</span>
             </a>
         </li>
     </ul>

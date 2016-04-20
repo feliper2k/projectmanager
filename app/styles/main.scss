@@ -1,11 +1,17 @@
 @import 'bootstrap';
 @import 'navigation';
+@import 'listpage';
 @import 'forms';
 @import 'login';
 @import 'users';
+@import 'projects';
 @import 'vars';
 
 
 body {
     background-color: $background--light;
+}
+
+a i.fa {
+    margin-right: 10px;
 }

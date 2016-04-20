@@ -1,0 +1,60 @@
+<nav ng-include="'navigation.html'" class="nav__top"></nav>
+<div class="container view__projects">
+    <!-- <div class="row text-right">
+        <button class="btn btn-default" ng-click="main.login.signOut()">Wyloguj</button>
+    </div> -->
+
+    <h2>Projekty</h2>
+
+    <table class="table table-hover">
+        <tr>
+            <th>Lp.</th><th>Nazwa</th><th>Zarządzca</th><th>Opis</th><th>Deadline</th><th>% wykonania</th>
+        </tr>
+        <tr ng-repeat="project in projects.list">
+            <td>{{ $index+1 }}</td>
+            <td><a ui-sref="ProjectsSingle({ id: project.id })">{{ project.name }}</a></td>
+            <td>{{ project.ownername }}</td>
+            <td>{{ project.description }}</td>
+            <td>{{ project.duedate | date:'dd/MM/yyyy HH:mm' }}</td>
+            <td>{{ project.progress }}%</td>
+        </tr>
+    </table>
+    <div>
+        <button class="btn" ng-click="projects.addForm.visible = !projects.addForm.visible"
+        ng-class="{ 'btn-default': projects.addForm.visible, 'btn-primary': !projects.addForm.visible }" ng-disabled="!main.tokenData().admin">
+            <i class="fa fa-plus"></i> Dodaj projekt
+        </button>
+    </div>
+    <div ng-if="projects.addForm.visible">
+        <form ng-submit="projects.actions.add()" class="form-horizontal form-add-user">
+            <div class="form-group">
+                <label for="newProjectName" class="col-sm-2">Nazwa projektu</label>
+                <div class="col-sm-10">
+                    <input type="text" ng-model="projects.newItem.name" class="form-control" id="newProjectName" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="newProjectDescription" class="col-sm-2">Opis</label>
+                <div class="col-sm-10">
+                    <textarea ng-model="projects.newItem.description" class="form-control" id="newProjectDescription" required>
+                    </textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="newProjectDeadline" class="col-sm-2">Deadline</label>
+                <div class="col-sm-5">
+                    <input type="text" ng-model="projects.newItem.dldate" placeholder="Format: DD/MM/RRRR"
+                     class="form-control" id="newProjectDeadline" pattern="^\d{2}/\d{2}/\d{4}$" required>
+                </div>
+                <div class="col-sm-5">
+                    <input type="text" ng-model="projects.newItem.dltime" class="form-control" placeholder="Format: HH:MM" pattern="^\d{2}:\d{2}$" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button class="btn btn-primary">Zatwierdź</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

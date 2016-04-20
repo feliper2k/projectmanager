@@ -37,5 +37,7 @@ apiRoutes.use(function authentication(req, res, next) {
 
 // endpoints
 const Users = require('./users')(apiRoutes);
+const Projects = require('./projects')(apiRoutes);
+const Tasks = require('./tasks')(apiRoutes);
 
 module.exports = apiRoutes;

@@ -1,7 +1,9 @@
-function UserService($http, $resource) {
+function UserService($http, $resource, ConfigService) {
     'ngInject';
 
-    const User = $resource('/api/users/:id', { id: '@id' }, {
+    const apiPrefix = ConfigService.apiPrefix;
+
+    const User = $resource(`${apiPrefix}/api/users/:id`, { id: '@id' }, {
         update: {
             method: 'PUT' // this method issues a PUT request
         }

@@ -1,8 +1,8 @@
 <nav ng-include="'navigation.html'" class="nav__top"></nav>
 <div class="container view__users">
-    <div class="row text-right">
+    <!-- <div class="row text-right">
         <button class="btn btn-default" ng-click="main.login.signOut()">Wyloguj</button>
-    </div>
+    </div> -->
 
     <h2>Użytkownicy</h2>
     <!-- <ul>
@@ -36,7 +36,7 @@
     </table>
     <div>
         <button class="btn" ng-click="users.addForm.visible = !users.addForm.visible"
-        ng-class="{ 'btn-default': users.addForm.visible, 'btn-primary': !users.addForm.visible }">Dodaj użytkownika</button>
+        ng-class="{ 'btn-default': users.addForm.visible, 'btn-primary': !users.addForm.visible }"><i class="fa fa-plus"></i> Dodaj użytkownika</button>
     </div>
     <div ng-if="users.addForm.visible">
         <form ng-submit="users.actions.add()" class="form-inline form-add-user">

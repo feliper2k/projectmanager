@@ -10,7 +10,7 @@ function NavigationViewCtrl(UserService, $window) {
         icon: 'users'
     },
     {
-        targetState: 'ProjectsMgmt',
+        targetState: 'ProjectsList',
         label: 'Projekty',
         icon: 'tasks'
     },

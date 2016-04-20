@@ -3,6 +3,7 @@
 const SERVER_PORT = 8001;
 
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const open = require('open');
@@ -13,6 +14,7 @@ const apiAuth = require('./rest/auth');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cors());
 
 // authentication token endpoint
 app.post('/auth', function (req, res) {
@@ -38,6 +40,10 @@ app.use('/api', apiRoutes);
 app.use(express.static('build'));
 
 app.listen(SERVER_PORT, () => {
-    open(`http://localhost:${SERVER_PORT}/`);
+    const devMode = process.argv.find((opt) => opt === '--dev');
+
+    if(!devMode) {
+        open(`http://localhost:${SERVER_PORT}/`);
+    }
     console.log(`App listening at :${SERVER_PORT}`);
 });

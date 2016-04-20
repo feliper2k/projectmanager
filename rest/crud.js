@@ -4,6 +4,8 @@ var connection = require('./connection');
 var mysql = require('promise-mysql');
 
 function CRUD(tableName) {
+    tableName = `\`${tableName}\``;     // mysql backtick escaping
+
     function query(string, options) {
         return connection.then(
             (conn) => conn.query(string, options)
@@ -32,7 +34,8 @@ function CRUD(tableName) {
     }
 
     function find(conditions, limit) {
-        const rowLimit = limit ? ` LIMIT ${parseInt(limit)}` : ``;
+        const limitFormat = /^\d+(,\d+)?$/;
+        const rowLimit = limitFormat.test(limit) ? ` LIMIT ${limit}` : ``;
 
         if(conditions) {
             let constraint = conditions.join(' AND ');

@@ -25,6 +25,10 @@
             border-bottom: solid 3px $brand-primary;
         }
 
+        &.logout {
+            color: $brand-warning;
+        }
+
         i {
             margin-left: 10px;
         }
