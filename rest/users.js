@@ -10,7 +10,14 @@ const crypto = require('crypto');
 function getUserCollection(req, res) {
     const limit = req.query.limit;
 
-    Users.find(null, limit).then((matches) => {
+    Users.totalCount().then(count => {
+        res.set({
+            'X-Total-Count': count
+        });
+
+        return Users.find(null, limit);
+    })
+    .then(matches => {
         // filter out some unneeded information such as users' crypto stuff
         res.json(matches.map(
             (user) => _.omit(user, ['hash', 'salt'])

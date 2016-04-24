@@ -6,11 +6,11 @@
 
     <h2>Projekty</h2>
 
-    <table class="table table-hover">
+    <table class="table" paginated-table data-posts-per-page="8" data-source="projects.list">
         <tr>
             <th>Lp.</th><th>Nazwa</th><th>Zarządzca</th><th>Opis</th><th>Deadline</th><th>% wykonania</th>
         </tr>
-        <tr ng-repeat="project in projects.list">
+        <tr ng-repeat="project in table.posts">
             <td>{{ $index+1 }}</td>
             <td><a ui-sref="ProjectsSingle({ id: project.id })">{{ project.name }}</a></td>
             <td>{{ project.ownername }}</td>

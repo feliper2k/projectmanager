@@ -14,7 +14,9 @@ const apiAuth = require('./rest/auth');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors({
+    exposedHeaders: ['x-total-count']
+}));
 
 // authentication token endpoint
 app.post('/auth', function (req, res) {

@@ -12,6 +12,12 @@ function CRUD(tableName) {
         );
     }
 
+    function totalCount() {
+        // return query(`SELECT COUNT(*) FROM ${tableName} AS count`).then(result => result.count);
+        return query(`SELECT COUNT(*) as count FROM ${tableName}`)
+               .then(result => result[0].count);
+    }
+
     function create(newItem) {
         return query(`INSERT INTO ${tableName} SET ?`, newItem);
     }
@@ -50,7 +56,8 @@ function CRUD(tableName) {
         update,
         deleteId,
         findById,
-        find
+        find,
+        totalCount
     };
 }
 

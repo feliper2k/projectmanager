@@ -1,0 +1,11 @@
+<div class="table__pagination">
+    <button class="btn" ng-disabled="!table.canNavigate.back" ng-click="table.navigate(table.activePage-1)">
+        <i class="fa fa-chevron-left"></i>
+    </button>
+    <button class="btn" ng-class="{ 'btn-primary': page.active }" ng-repeat="page in table.pages" ng-click="table.navigate(page.index)">
+        {{ page.label }}
+    </button>
+    <button class="btn" ng-disabled="!table.canNavigate.forward" ng-click="table.navigate(table.activePage+1)">
+        <i class="fa fa-chevron-right"></i>
+    </button>
+</div>

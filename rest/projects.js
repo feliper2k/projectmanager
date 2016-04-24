@@ -11,9 +11,14 @@ const moment = require('moment');
 function getProjectCollection(req, res) {
     const limit = req.query.limit;
 
-    ProjectsView.find(null, limit).then((matches) => {
-        res.json(matches);
-    });
+    ProjectsView.totalCount().then(count => {
+        res.set({
+            'X-Total-Count': count
+        });
+
+        return ProjectsView.find(null, limit);
+    })
+    .then(matches => res.json(matches));
 }
 
 function getProjectById(req, res) {
@@ -29,9 +34,17 @@ function getProjectById(req, res) {
 
 function createProject(req, res) {
     if(req.token.admin) {
+        // format date in Polish locale
+        req.body.duedate = req.body.duedate.replace(/(\d+)\/(\d+)\/(\d+)/, '$2/$1/$3');
+
         // verify date before submitting
         const correctDate = Date.parse(req.body.duedate);
-        if(!correctDate) return;
+        if(!correctDate) {
+            return res.json({
+                success: false,
+                error: 'incorrect date format'
+            });
+        }
 
         const newProject = _.assign(req.body, {
             owner: req.token.userid,
