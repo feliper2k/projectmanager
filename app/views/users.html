@@ -9,11 +9,11 @@
         <li ng-repeat="user in users.list">{{ user.displayname }}</li>
     </ul> -->
 
-    <table class="table table-hover">
+    <table class="table table-hover" paginated-table data-posts-per-page="8" data-source="users.list">
         <tr>
             <th>Lp.</th><th>Login</th><th>Imię i nazwisko</th><th>Dodano</th><th>Admin?</th><th>Akcje</th>
         </tr>
-        <tr ng-repeat="user in users.list">
+        <tr ng-repeat="user in table.posts">
             <td>{{ $index+1 }}</td>
             <td>{{ user.name }}</td>
             <td>
@@ -35,15 +35,15 @@
         </tr>
     </table>
     <div>
-        <button class="btn" ng-click="users.addForm.visible = !users.addForm.visible"
+        <button class="btn" ng-click="users.addForm.visible = !users.addForm.visible" ng-disabled="!main.tokenData().admin"
         ng-class="{ 'btn-default': users.addForm.visible, 'btn-primary': !users.addForm.visible }"><i class="fa fa-plus"></i> Dodaj użytkownika</button>
     </div>
     <div ng-if="users.addForm.visible">
         <form ng-submit="users.actions.add()" class="form-inline form-add-user">
             <div class="form-group">
-                <input type="text" ng-model="users.newUser.userName" placeholder="Login" class="form-control">
-                <input type="password" ng-model="users.newUser.userPass" placeholder="Hasło" class="form-control">
-                <input type="text" ng-model="users.newUser.displayName" placeholder="Imię i nazwisko" class="form-control">
+                <input type="text" ng-model="users.newUser.userName" placeholder="Login" class="form-control" required>
+                <input type="password" ng-model="users.newUser.userPass" placeholder="Hasło" class="form-control" required>
+                <input type="text" ng-model="users.newUser.displayName" placeholder="Imię i nazwisko" class="form-control" required>
                 <div class="checkbox">
                     <label><input type="checkbox" ng-model="users.newUser.isAdmin"> Administrator</label>
                 </div>

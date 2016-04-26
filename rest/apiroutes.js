@@ -34,7 +34,6 @@ apiRoutes.use(function authentication(req, res, next) {
 
 // apiRoutes.use(function CORS...)
 
-
 // endpoints
 const Users = require('./users')(apiRoutes);
 const Projects = require('./projects')(apiRoutes);

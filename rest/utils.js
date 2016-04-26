@@ -1,7 +1,7 @@
 const MESSAGES = {
     NOADMIN: {
         success: false,
-        message: 'Administrator rights needed.'
+        message: 'wymagane prawa administratora'
     }
 };
 

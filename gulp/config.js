@@ -14,7 +14,8 @@ export default {
     dest: 'build/css',
     prodSourcemap: false,
     sassIncludePaths: [
-        'node_modules/bootstrap-sass/assets/stylesheets/'
+        'node_modules/bootstrap-sass/assets/stylesheets/',
+        'node_modules/toastr/'
     ]
   },
 

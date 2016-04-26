@@ -1,4 +1,5 @@
 import { find } from 'lodash';
+import toastr   from 'toastr';
 
 function UserViewCtrl(UserService, $window) {
     'ngInject';
@@ -6,7 +7,7 @@ function UserViewCtrl(UserService, $window) {
     // ViewModel
     const vm = this;
 
-    vm.list = UserService.query();
+    vm.list = UserService;
     vm.newUser = {};
 
     vm.addForm = {
@@ -20,22 +21,27 @@ function UserViewCtrl(UserService, $window) {
             UserService.remove({ id: userId }).$promise
             .then((success) => {
                 vm.list = UserService.query();
-            });
+            })
+            .catch(error => toastr.error(`Błąd: ${error.data.message}`));
         },
 
         add() {
             UserService.save(vm.newUser).$promise
             .then((success) => {
                 vm.list = UserService.query();
+            })
+            .catch(error => {
+                toastr.error(`Błąd: ${error.data.message}`);
             });
         },
 
         save(userId) {
             let savedItem = find(vm.list, (user) => user.id === userId);
 
-            savedItem.$update((success) => {
+            savedItem.$update(success => {
                 vm.list = UserService.query();
-            });
+            },
+            error => toastr.error(`Błąd: ${error.data.message}`));
         }
     }
 }

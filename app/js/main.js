@@ -1,4 +1,6 @@
 import angular from 'angular';
+import jQuery  from 'jquery';
+// import toastr  from 'toastr';
 
 // angular modules
 import constants from './constants';
@@ -25,6 +27,10 @@ const requires = [
 
 // mount on window for testing
 window.app = angular.module('app', requires);
+window.jQuery = jQuery;
+
+require('bootstrap');
+// window.toastr = toastr;
 
 angular.module('app').constant('AppSettings', constants);
 

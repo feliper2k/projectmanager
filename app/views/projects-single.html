@@ -79,11 +79,11 @@
 
     <h2>Zadania</h2>
 
-    <table class="table table-hover">
+    <table class="table table-hover" paginated-table data-posts-per-page="8" data-source="project.tasks.all">
         <tr>
             <th>Lp.</th><th>Nazwa</th><th>Opis</th><th>Status</th><th>% wykonania</th>
         </tr>
-        <tr ng-repeat="task in project.tasks">
+        <tr ng-repeat="task in table.posts">
             <td>{{ $index+1 }}</td>
             <td><a ui-sref="TasksSingle({ id: project.id })">{{ task.name }}</a></td>
             <td>{{ task.description }}</td>

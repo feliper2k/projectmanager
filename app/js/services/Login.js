@@ -18,8 +18,9 @@ function LoginService($http, $window, $state, $q, UserService, ConfigService) {
         },
 
         signOut() {
-            $window.localStorage.removeItem('token');
-            $state.go('Login');
+            $state.go('Login').then(() => {
+                $window.localStorage.removeItem('token');
+            });
         },
 
         tokenData() {

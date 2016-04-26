@@ -30,6 +30,8 @@ function buildScript(file) {
     fullPaths: !global.isProd
   });
 
+  bundler.require('./node_modules/bootstrap-sass/assets/javascripts/bootstrap.js', { expose: 'bootstrap' });
+
   if ( !global.isProd ) {
     bundler = watchify(bundler);
 

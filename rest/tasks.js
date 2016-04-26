@@ -3,7 +3,7 @@
 const CRUD = require('./crud');
 const MESSAGES = require('./utils').MESSAGES;
 
-const Tasks = CRUD('projects');
+const Tasks = CRUD('tasks');
 const _ = require('lodash');
 
 function getTaskCollection(req, res) {
@@ -11,9 +11,15 @@ function getTaskCollection(req, res) {
     const projectId = parseInt(req.params.pid) || null;
     const constraint = projectId ? [`project = ${projectId}`] : null;
 
-    Tasks.find(constraint, limit).then((matches) => {
-        res.json(matches);
-    });
+    Tasks.find(constraint, limit).then(matches => res.json(matches));
+
+    // Tasks.totalCount(projectId).then(count => {
+    //     res.set({
+    //         'X-Total-Count': count
+    //     });
+    //
+    //     return Users.find(null, limit);
+    // })
 }
 
 function getTaskById(req, res) {

@@ -1,6 +1,6 @@
 import { find, omit } from 'lodash';
 
-function ProjectsSingleCtrl(ProjectService, UserService, $window, $stateParams, $state) {
+function ProjectsSingleCtrl(ProjectService, UserService, TaskService, $window, $stateParams, $state) {
     'ngInject';
 
     // ViewModel
@@ -9,8 +9,7 @@ function ProjectsSingleCtrl(ProjectService, UserService, $window, $stateParams, 
     const projectId = $stateParams.id;
     vm.current = ProjectService.get({ id: projectId });
     vm.owners = UserService.query();
-
-    vm.tasks = [];
+    vm.tasks = TaskService;
 
     vm.editor = {
         visible: false

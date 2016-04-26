@@ -48,15 +48,20 @@ function hashGenerator(password) {
 }
 
 function createUser(req, res) {
-    const newUser = _.assign({
-        name: req.body.userName,
-        displayname: req.body.displayName,
-        admin: req.body.isAdmin ? 1 : 0
-    }, hashGenerator(req.body.userPass));
+    if(req.token.admin) {
+        const newUser = _.assign({
+            name: req.body.userName,
+            displayname: req.body.displayName,
+            admin: req.body.isAdmin ? 1 : 0
+        }, hashGenerator(req.body.userPass));
 
-    return Users.create(newUser)
-    .then((newRow) => res.json(newRow))
-    .catch((error) => res.json(error));
+        return Users.create(newUser)
+        .then(newRow => res.json(newRow))
+        .catch(error => res.json(error));
+    }
+    else {
+        res.status(403).send(MESSAGES.NOADMIN);
+    }
 }
 
 function updateUser(req, res) {

@@ -1,4 +1,5 @@
 import { find, pick } from 'lodash';
+import toastr         from 'toastr';
 
 function ProjectsViewCtrl(ProjectService, $scope, $window, $http) {
     'ngInject';
@@ -32,15 +33,17 @@ function ProjectsViewCtrl(ProjectService, $scope, $window, $http) {
                 $scope.$broadcast('tableViewUpdateRequest');
                 vm.addForm.visible = false;
                 vm.newItem = {};
-            });
+            })
+            .catch(error => toastr.error(`Błąd: ${error.data.message}`));
         },
 
         save(projectId) {
             let savedItem = find(vm.list, (project) => project.id === projectId);
 
-            savedItem.$update((success) => {
+            savedItem.$update(success => {
                 vm.list = ProjectService.query();
-            });
+            },
+            error => toastr.error(`Błąd: ${error.data.message}`));
         }
     }
 }

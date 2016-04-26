@@ -1,5 +1,7 @@
 'use strict';
 
+import toastr from 'toastr';
+
 function AuthenticationService($q, $window, $location) {
     'ngInject';
 
@@ -14,7 +16,8 @@ function AuthenticationService($q, $window, $location) {
             return config;
         },
         responseError: function (response) {
-            if (response.status === 401 || response.status === 403) {
+            if (response.status === 401) {
+                toastr.error('Brak dostępu!');
                 $location.path('/login');
             }
             return $q.reject(response);
