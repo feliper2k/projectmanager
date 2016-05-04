@@ -1,6 +1,7 @@
-import { find, omit } from 'lodash';
+import { find, omit, assign } from 'lodash';
+import toastr                 from 'toastr';
 
-function ProjectsSingleCtrl(ProjectService, UserService, TaskService, $window, $stateParams, $state) {
+function ProjectsSingleCtrl(ProjectService, UserService, TaskService, $window, $stateParams, $state, $rootScope) {
     'ngInject';
 
     // ViewModel
@@ -10,10 +11,17 @@ function ProjectsSingleCtrl(ProjectService, UserService, TaskService, $window, $
     vm.current = ProjectService.get({ id: projectId });
     vm.owners = UserService.query();
     vm.tasks = TaskService;
+    vm.tasksByProject = TaskService.byProject(projectId);
 
     vm.editor = {
         visible: false
     };
+
+    vm.addForm = {
+        visible: false
+    };
+
+    vm.newItem = {};
 
     vm.actions =  {
         save() {
@@ -21,6 +29,21 @@ function ProjectsSingleCtrl(ProjectService, UserService, TaskService, $window, $
 
             new ProjectService(item).$update(() => {
                 $state.go('ProjectsSingle', $stateParams, { reload: true });
+            });
+        },
+
+        addItem() {
+            let newEntry = assign(vm.newItem, {
+                project: projectId
+            });
+
+            new TaskService.all(newEntry).$save(success => {
+                $rootScope.$broadcast('tableViewUpdateRequest');
+                vm.addForm.visible = false;
+                toastr.info(`Dodano zadanie.`);
+            },
+            error => {
+                toastr.error(`Błąd: ${error.message}`);
             });
         }
     }

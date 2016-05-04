@@ -79,34 +79,51 @@
 
     <h2>Zadania</h2>
 
-    <table class="table table-hover" paginated-table data-posts-per-page="8" data-source="project.tasks.all">
+    <table class="table table-hover" paginated-table data-posts-per-page="8" data-source="project.tasksByProject">
         <tr>
-            <th>Lp.</th><th>Nazwa</th><th>Opis</th><th>Status</th><th>% wykonania</th>
+            <th>Lp.</th><th>Nazwa</th><th>Kierownik</th><th>Przydzielono</th><th>Opis</th><th>Status</th><th>% wykonania</th>
         </tr>
         <tr ng-repeat="task in table.posts">
             <td>{{ $index+1 }}</td>
             <td><a ui-sref="TasksSingle({ id: project.id })">{{ task.name }}</a></td>
+            <td>{{ task.assignername }}</td>
+            <td>{{ task.assigneename }}</td>
             <td>{{ task.description }}</td>
             <td>{{ task.status | taskstatus }}</td>
             <td>{{ task.progress }}%</td>
         </tr>
     </table>
     <div>
-        <button class="btn" ng-click="users.addForm.visible = !users.addForm.visible"
-        ng-class="{ 'btn-default': users.addForm.visible, 'btn-primary': !users.addForm.visible }">Dodaj użytkownika</button>
+        <button class="btn" ng-click="project.addForm.visible = !project.addForm.visible" ng-disabled="!main.tokenData().admin"
+        ng-class="{ 'btn-default': project.addForm.visible, 'btn-primary': !project.addForm.visible }">Dodaj zadanie</button>
     </div>
-    <div ng-if="users.addForm.visible">
-        <form ng-submit="users.actions.add()" class="form-inline form-add-user">
+    <div ng-if="project.addForm.visible">
+        <form ng-submit="project.actions.addItem()" class="form-horizontal form-add-user">
             <div class="form-group">
-                <input type="text" ng-model="users.newUser.userName" placeholder="Login" class="form-control">
-                <input type="password" ng-model="users.newUser.userPass" placeholder="Hasło" class="form-control">
-                <input type="text" ng-model="users.newUser.displayName" placeholder="Imię i nazwisko" class="form-control">
-                <div class="checkbox">
-                    <label><input type="checkbox" ng-model="users.newUser.isAdmin"> Administrator</label>
+                <label for="newTaskName" class="col-sm-2">Nazwa zadania</label>
+                <div class="col-sm-10">
+                    <input type="text" ng-model="project.newItem.name" class="form-control" id="newProjectName" required>
                 </div>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-primary">Dodaj</button>
+                <label for="newTaskDescription" class="col-sm-2">Opis</label>
+                <div class="col-sm-10">
+                    <textarea ng-model="project.newItem.description" class="form-control" id="newProjectDescription" required>
+                    </textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="newTaskAssignee" class="col-sm-2">Przydziel do</label>
+                <div class="col-sm-10">
+                    <select class="form-control" id="newTaskAssignee" ng-model="project.newItem.assignee">
+                        <option ng-repeat="user in project.owners" value="{{ user.id }}">{{ user.displayname }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button class="btn btn-primary" type="submit">Zatwierdź</button>
+                </div>
             </div>
         </form>
     </div>

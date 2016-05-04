@@ -1,6 +1,13 @@
 'use strict';
 
-import toastr from 'toastr';
+import toastr   from 'toastr';
+
+const ERROR_MESSAGES = {
+    401: 'Sesja wygasła lub nieprawidłowy token sesji',
+    403: 'Brak dostępu!',
+    404: 'Problem z połączeniem z API',
+    500: 'Wewnętrzny błąd serwera API'
+};
 
 function AuthenticationService($q, $window, $location) {
     'ngInject';
@@ -16,10 +23,13 @@ function AuthenticationService($q, $window, $location) {
             return config;
         },
         responseError: function (response) {
-            if (response.status === 401) {
-                toastr.error('Brak dostępu!');
-                $location.path('/login');
+            let errorMessage;
+
+            if(errorMessage = ERROR_MESSAGES[response.status]) {
+                toastr.error(errorMessage);
             }
+
+            $location.path('/login');
             return $q.reject(response);
         }
     };

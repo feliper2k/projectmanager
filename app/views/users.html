@@ -25,10 +25,10 @@
                 ng-disabled="!main.tokenData().admin">
             </td>
             <td>
-                <button class="btn btn-default" ng-click="users.actions.save(user.id)">
+                <button class="btn btn-default" ng-click="users.actions.save(user)">
                     <i class="fa fa-check"></i> Zapisz
                 </button>
-                <button class="btn btn-danger" ng-click="users.actions.remove(user.id)" ng-disabled="!main.tokenData().admin">
+                <button class="btn btn-danger" ng-click="users.actions.remove(user)" ng-disabled="!main.tokenData().admin">
                     <i class="fa fa-times"></i> Usuń
                 </button>
             </td>

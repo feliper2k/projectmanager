@@ -1,7 +1,7 @@
 import { find } from 'lodash';
 import toastr   from 'toastr';
 
-function UserViewCtrl(UserService, $window) {
+function UserViewCtrl(UserService, $window, $rootScope) {
     'ngInject';
 
     // ViewModel
@@ -15,33 +15,34 @@ function UserViewCtrl(UserService, $window) {
     };
 
     vm.actions = {
-        remove(userId) {
+        remove(userRsrc) {
             if(!$window.confirm('Czy na pewno?')) return;
 
-            UserService.remove({ id: userId }).$promise
-            .then((success) => {
-                vm.list = UserService.query();
-            })
-            .catch(error => toastr.error(`Błąd: ${error.data.message}`));
+            userRsrc.$remove(success => {
+                $rootScope.$broadcast('tableViewUpdateRequest');
+            },
+            error => {
+                toastr.error(`Błąd: ${error.data.message}`)
+            });
         },
 
         add() {
-            UserService.save(vm.newUser).$promise
-            .then((success) => {
-                vm.list = UserService.query();
+            return UserService.save(vm.newUser).$promise
+            .then(success => {
+                $rootScope.$broadcast('tableViewUpdateRequest');
             })
             .catch(error => {
                 toastr.error(`Błąd: ${error.data.message}`);
             });
         },
 
-        save(userId) {
-            let savedItem = find(vm.list, (user) => user.id === userId);
-
-            savedItem.$update(success => {
-                vm.list = UserService.query();
+        save(userRsrc) {
+            userRsrc.$update(success => {
+                $rootScope.$broadcast('tableViewUpdateRequest');
             },
-            error => toastr.error(`Błąd: ${error.data.message}`));
+            error => {
+                toastr.error(`Błąd: ${error.data.message}`);
+            });
         }
     }
 }

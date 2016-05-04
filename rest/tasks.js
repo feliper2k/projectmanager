@@ -4,14 +4,30 @@ const CRUD = require('./crud');
 const MESSAGES = require('./utils').MESSAGES;
 
 const Tasks = CRUD('tasks');
+const TasksView = CRUD('tasks-view');
 const _ = require('lodash');
+
+function sanitizeBody(req, res, next) {
+    // an array of columns whitelisted (i.e. included) in create/update routines
+    const PURE_COLUMNS = [
+        'id', 'project', 'assigner', 'assignee', 'name',
+        'description', 'status', 'progress'
+    ];
+
+    // debugger;
+
+    if(_.includes(['POST', 'PUT'], req.method)) {
+        req.body = _.pick(req.body, PURE_COLUMNS);
+    }
+    next();
+}
 
 function getTaskCollection(req, res) {
     const limit = req.query.limit || null;
     const projectId = parseInt(req.params.pid) || null;
     const constraint = projectId ? [`project = ${projectId}`] : null;
 
-    Tasks.find(constraint, limit).then(matches => res.json(matches));
+    TasksView.find(constraint, limit).then(matches => res.json(matches));
 
     // Tasks.totalCount(projectId).then(count => {
     //     res.set({
@@ -23,7 +39,7 @@ function getTaskCollection(req, res) {
 }
 
 function getTaskById(req, res) {
-    Tasks.findById(req.params.id).then((project) => {
+    TasksView.findById(req.params.id).then((project) => {
         if(project) {
             res.json(project);
         }
@@ -46,7 +62,7 @@ function createTask(req, res) {
         }
 
         const newTask = _.assign(req.body, {
-            owner: req.token.userid
+            assigner: req.token.userid
         }, parentProject);
 
         return Tasks.create(newTask)
@@ -85,6 +101,8 @@ function deleteTask(req, res) {
 }
 
 module.exports = function (api) {
+    api.use(sanitizeBody);
+
     api.get('/tasks/', getTaskCollection);
     api.get('/tasks/:id', getTaskById);
     api.post('/tasks/', createTask);
