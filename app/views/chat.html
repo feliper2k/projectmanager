@@ -1,0 +1,28 @@
+<nav ng-include="'navigation.html'" class="nav__top"></nav>
+<div class="container view__chat">
+    <h2 class="col-md-12">Czat</h2>
+
+    <div class="row">
+        <nav class="col-md-3 view__chat-groups">
+            <ul>
+                <!-- <li class="active"><a href="#">Konwersacja 1</a></li>
+                <li><a href="#">Konwersacja 2</a></li>
+                <li><a href="#">Konwersacja 3</a></li> -->
+
+                <li ng-repeat="conversation in chat.groups" ui-sref-active="active">
+                    <a ui-sref="Chat.Message({ gid: conversation.groupid })">{{ conversation.members }}</a>
+                </li>
+            </ul>
+        </nav>
+        <section class="col-md-9 view__chat-window" ui-view>
+
+        </section>
+    </div>
+    <div class="row">
+        <form action="">
+            <div class="form-group col-md-offset-3 col-md-9">
+                <textarea name="" id="" class="form-control" placeholder="Wpisz wiadomość"></textarea>
+            </div>
+        </form>
+    </div>
+</div>

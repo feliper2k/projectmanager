@@ -32,6 +32,15 @@ function CRUD(tableName) {
         return query(`DELETE FROM ${tableName} WHERE id=${itemId}`);
     }
 
+    function deleteWhere(conditions) {
+        if(conditions) {
+            const constraint = conditions.join(' AND ');
+            const queryString = `DELETE FROM ${tableName} WHERE ${constraint}`;
+
+            return query(queryString);
+        }
+    }
+
     function findById(itemId) {
         // reduce the array before handing the items over
         itemId = parseInt(itemId);
@@ -44,19 +53,40 @@ function CRUD(tableName) {
         const rowLimit = limitFormat.test(limit) ? ` LIMIT ${limit}` : ``;
 
         if(conditions) {
-            let constraint = conditions.join(' AND ');
-            return query(`SELECT * FROM ${tableName} WHERE ${constraint}${rowLimit}`);
+            const constraint = conditions.join(' AND ');
+            const queryString = `SELECT * FROM ${tableName} WHERE ${constraint}${rowLimit}`;
+
+            return query(queryString);
         }
 
         return query(`SELECT * FROM ${tableName}${rowLimit}`);
+    }
+
+    function findDistinct(conditions, limit, columns) {
+        const limitFormat = /^\d+(,\d+)?$/;
+        const rowLimit = limitFormat.test(limit) ? ` LIMIT ${limit}` : ``;
+        const selectedCols = columns.map(col => `\`${col}\``).join(',');
+
+        if(columns) {
+            if(conditions) {
+                const constraint = conditions.join(' AND ');
+                const queryString = `SELECT DISTINCT ${selectedCols} FROM ${tableName} WHERE ${constraint}${rowLimit}`;
+
+                return query(queryString);
+            }
+
+            return query(`SELECT DISTINCT ${selectedCols} FROM ${tableName}${rowLimit}`);
+        }
     }
 
     return {
         create,
         update,
         deleteId,
+        deleteWhere,
         findById,
         find,
+        findDistinct,
         totalCount
     };
 }

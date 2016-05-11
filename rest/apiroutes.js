@@ -38,5 +38,6 @@ apiRoutes.use(function authentication(req, res, next) {
 const Users = require('./users')(apiRoutes);
 const Projects = require('./projects')(apiRoutes);
 const Tasks = require('./tasks')(apiRoutes);
+const ChatMessages = require('./messages')(apiRoutes);
 
 module.exports = apiRoutes;

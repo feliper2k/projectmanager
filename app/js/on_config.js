@@ -30,9 +30,14 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $httpPr
     })
     .state('Chat', {
         url: '/chat',
-        controller: 'ProjectsViewCtrl as chat',
+        controller: 'ChatViewCtrl as chat',
         templateUrl: 'chat.html',
-        title: 'Chat'
+        title: 'Czat'
+    })
+    .state('Chat.Message', {
+        url: '/messages/:gid',
+        // controller: 'ChatWindowViewCtrl as chatwin',
+        templateUrl: 'chat-window.html'
     });
 
     $urlRouterProvider.otherwise('/manage/users');

@@ -101,7 +101,8 @@ function deleteTask(req, res) {
 }
 
 module.exports = function (api) {
-    api.use(sanitizeBody);
+    api.use('/tasks/', sanitizeBody);
+    api.use('/project/:pid/tasks/', sanitizeBody);
 
     api.get('/tasks/', getTaskCollection);
     api.get('/tasks/:id', getTaskById);
