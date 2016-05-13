@@ -1,0 +1,97 @@
+<nav ng-include="'navigation.html'" class="nav__top"></nav>
+<div class="container view__projects--single">
+    <!-- <div class="row text-right">
+        <button class="btn btn-default" ng-click="main.login.signOut()">Wyloguj</button>
+    </div> -->
+    <p>
+        <a ui-sref="ProjectsSingle({ id: task.current.project })"><i class="fa fa-chevron-left"></i>Powrót</a>
+    </p>
+
+    <div class="row">
+        <section class="view__projects-description col-md-6">
+            <h2>{{ task.current.name }}</h2>
+            <p>{{ task.current.description }}</p>
+        </section>
+
+        <section class="view__projects-meta col-md-6">
+            <!-- <div>
+                <i class="fa fa-clock-o"></i> <strong>Czas spędzony nad projektem: </strong> <span ng-bind="">[czas]</span>
+            </div> -->
+            <div class="meta-row">
+                <i class="fa fa-exclamation"></i> <strong>Status: </strong> <span>{{ task.current.status | taskstatus }}</span>
+            </div>
+            <div class="meta-row">
+                <i class="fa fa-user"></i> <strong>Przydzielono: </strong> <span>{{ task.current.assigneename }}</span>
+            </div>
+            <div class="meta-row">
+                <i class="fa fa-tasks"></i> <strong>Stopień ukończenia: </strong> <span>{{ task.current.progress }}%</span>
+            </div>
+            <div class="meta-row">
+                <strong>Oznacz zadanie jako: </strong>
+                <button class="btn btn-primary" ng-click="task.actions.markAs('new')">Nowe</button>
+                <button class="btn btn-warning" ng-click="task.actions.markAs('in progress')">W trakcie</button>
+                <button class="btn btn-success" ng-click="task.actions.markAs('done')">Ukończone</button>
+            </div>
+            <!-- <div>
+                <i class="fa fa-clock-o"></i> <strong>Uczestnicy: </strong> <span>...</span> <a href="#">Edytuj...</a>
+            </div> -->
+        </section>
+    </div>
+
+    <div>
+        <button class="btn" ng-click="project.editor.visible = !project.editor.visible"
+        ng-class="{ 'btn-default': project.editor.visible, 'btn-primary': !project.editor.visible }" ng-disabled="!main.tokenData().admin">
+            <i class="fa fa-pencil"></i> Edytuj
+        </button>
+
+        <button class="btn btn-danger" ng-click="task.actions.deleteTask()">Usuń</button>
+    </div>
+
+    <div ng-if="project.editor.visible">
+        <form ng-submit="task.actions.save()" class="form-horizontal form-add-user">
+            <div class="form-group">
+                <label for="newProjectName" class="col-sm-2">Nazwa zadania</label>
+                <div class="col-sm-10">
+                    <input type="text" ng-model="task.current.name" class="form-control" id="newProjectName" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="newProjectManager" class="col-sm-2">Przydzielono</label>
+                <div class="col-sm-10">
+                    <select ng-model="task.current.assignee" class="form-control" id="newProjectDescription" required>
+                        <option ng-repeat="owner in task.owners" value="{{ owner.id }}">{{ owner.displayname }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="newProjectName" class="col-sm-2">Stopień ukończenia (%)</label>
+                <div class="col-sm-10">
+                    <input type="number" ng-model="task.current.progress" class="form-control" id="newProjectName" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="newProjectDescription" class="col-sm-2">Opis</label>
+                <div class="col-sm-10">
+                    <textarea ng-model="task.current.description" class="form-control" id="newProjectDescription" required>
+                    </textarea>
+                </div>
+            </div>
+            <!-- <div class="form-group">
+                <label for="newProjectDeadline" class="col-sm-2">Deadline</label>
+                <div class="col-sm-5">
+                    <input type="text" ng-model="project.current.dldate" placeholder="Format: DD/MM/RRRR"
+                     class="form-control" id="newProjectDeadline" pattern="^d{2}/d{2}/d{4}$" required>
+                </div>
+                <div class="col-sm-5">
+                    <input type="text" ng-model="project.current.dltime" class="form-control" placeholder="Format: HH:MM" pattern="^d{2}:d{2}$" required>
+                </div>
+            </div> -->
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button class="btn btn-primary">Zatwierdź</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

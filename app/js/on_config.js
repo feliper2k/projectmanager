@@ -28,6 +28,12 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $httpPr
         templateUrl: 'projects-single.html',
         title: 'Edytuj projekt'
     })
+    .state('TasksSingle', {
+        url: '/manage/tasks/:id',
+        controller: 'TasksSingleCtrl as task',
+        templateUrl: 'tasks-single.html',
+        title: 'Edytuj zadanie'
+    })
     .state('Chat', {
         url: '/chat',
         controller: 'ChatViewCtrl as chat',
@@ -36,8 +42,15 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $httpPr
     })
     .state('Chat.Message', {
         url: '/messages/:gid',
-        // controller: 'ChatWindowViewCtrl as chatwin',
-        templateUrl: 'chat-window.html'
+        controller: 'ChatWindowViewCtrl as chatwin',
+        templateUrl: 'chat-window.html',
+        resolve: {
+            Messages(ChatService, $stateParams) {
+                'ngInject';
+
+                return ChatService.groups.all.query({ gid: $stateParams.gid }).$promise;
+            }
+        }
     });
 
     $urlRouterProvider.otherwise('/manage/users');

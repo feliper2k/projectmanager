@@ -49,6 +49,7 @@ function CRUD(tableName) {
     }
 
     function find(conditions, limit) {
+        debugger;
         const limitFormat = /^\d+(,\d+)?$/;
         const rowLimit = limitFormat.test(limit) ? ` LIMIT ${limit}` : ``;
 

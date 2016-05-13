@@ -43,9 +43,10 @@ function getMessageGroupsByUser(req, res) {
     const filter = [`userid = ${userId}`];
 
     if(Number.isInteger(userId)) {
-        ChatMessagesMembers.findDistinct(filter, null, ['groupid']).then(
-            matches => res.json(_.map(matches, 'groupid'))
-        );
+        ChatMessagesMembers.findDistinct(filter, null, ['groupid'])
+        .then(matches => matches.map(g => ChatMessagesGroupsView.find([`groupid = ${g.groupid}`])))     // also fetch membership data
+        .then(groupsRequests => Promise.all(groupsRequests))
+        .then(groups => res.json(_.flatten(groups)));
     }
 }
 
