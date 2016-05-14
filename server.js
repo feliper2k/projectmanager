@@ -41,11 +41,33 @@ app.use('/api', apiRoutes);
 // serve build
 app.use(express.static('build'));
 
-app.listen(SERVER_PORT, () => {
+const server = app.listen(SERVER_PORT, () => {
     const devMode = process.argv.find((opt) => opt === '--dev');
 
     if(!devMode) {
         open(`http://localhost:${SERVER_PORT}/`);
     }
     console.log(`App listening at :${SERVER_PORT}`);
+});
+
+// chat listener
+const io = require('socket.io')(server);
+
+io.on('connection', (client) => {
+    console.log('a user connected');
+
+    debugger;
+
+    client.on('newMessage', data => {
+        client.emit('newMessage', data);
+        client.broadcast.emit('newMessage', data);
+    });
+    client.on('newGroup', data => {
+        client.emit('newGroup', data);
+        client.broadcast.emit('newGroup', data);
+    });
+
+    client.on('disconnect', () => {
+        console.log('user disconnected');
+    });
 });

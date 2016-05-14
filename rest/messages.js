@@ -4,6 +4,7 @@ const CRUD = require('./crud');
 const MESSAGES = require('./utils').MESSAGES;
 
 const ChatMessages = CRUD('messages');
+const ChatMessagesView = CRUD('messages-view');
 const ChatMessagesGroups = CRUD('messages-groups');
 const ChatMessagesGroupsView = CRUD('messages-groups-view');
 const ChatMessagesMembers = CRUD('messages-groups-members');
@@ -27,7 +28,7 @@ function getMessageGroup(req, res) {
     const groupId = parseInt(req.params.gid) || null;
     const constraint = groupId ? [`\`group\` = ${groupId}`] : null;
 
-    ChatMessages.find(constraint, limit).then(matches => res.json(matches));
+    ChatMessagesView.find(constraint, limit).then(matches => res.json(matches));
 
     // Messages.totalCount(projectId).then(count => {
     //     res.set({
@@ -59,7 +60,7 @@ function getMessageGroupCollection(req, res) {
 }
 
 function getMessageById(req, res) {
-    ChatMessages.findById(req.params.id).then(singleMessage => {
+    ChatMessagesView.findById(req.params.id).then(singleMessage => {
         if(singleMessage) {
             return res.json(singleMessage);
         }

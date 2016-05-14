@@ -9,7 +9,7 @@
                 <li><a href="#">Konwersacja 2</a></li>
                 <li><a href="#">Konwersacja 3</a></li> -->
 
-                <li ng-repeat="conversation in chat.groups" ui-sref-active="active">
+                <li ng-repeat="conversation in chat.groups" ui-sref-active="active" ng-class="{ 'unread': conversation.unread }">
                     <a ui-sref="Chat.Message({ gid: conversation.groupid })">{{ conversation.members }}</a>
                 </li>
             </ul>
@@ -19,10 +19,18 @@
         </section>
     </div>
     <div class="row">
-        <form action="">
-            <div class="form-group col-md-offset-3 col-md-9">
-                <textarea name="" id="" class="form-control" placeholder="Wpisz wiadomość"></textarea>
-            </div>
-        </form>
+        <div class="form-group col-md-3">
+            <select name="" class="form-control" id="newConversationSelect">
+                <option><em>Nowa konwersacja...</em></option>
+                <optgroup label="Użytkownicy">
+                    <option value="{{ user.id }}" ng-repeat="user in chat.users()">{{ user.displayname }}</option>
+                </optgroup>
+            </select>
+
+        </div>
+        <div class="form-group col-md-9">
+            <textarea name="" id="" ng-model="chat.newMessage.text" class="form-control"
+                placeholder="Wpisz wiadomość..." chat-textbox="chat.actions.postMessage()"></textarea>
+        </div>
     </div>
 </div>

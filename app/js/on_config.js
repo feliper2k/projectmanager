@@ -1,3 +1,5 @@
+import io       from 'socket.io-client';
+
 function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $httpProvider) {
     'ngInject';
 
@@ -38,6 +40,24 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $httpPr
         url: '/chat',
         controller: 'ChatViewCtrl as chat',
         templateUrl: 'chat.html',
+        resolve: {
+            ChatSocket($q) {
+                'ngInject';
+
+                const socket = io.connect('http://localhost:8001');
+
+                return new Promise((resolve, reject) => {
+                    socket.on('connect', () => {
+                        resolve(socket);
+                    });
+                    socket.on('error', (data) => {
+                        reject(data);
+                        console.log(data);
+                    });
+
+                });
+            }
+        },
         title: 'Czat'
     })
     .state('Chat.Message', {
@@ -48,7 +68,8 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $httpPr
             Messages(ChatService, $stateParams) {
                 'ngInject';
 
-                return ChatService.groups.all.query({ gid: $stateParams.gid }).$promise;
+                return ChatService.groups.all
+                    .query({ gid: $stateParams.gid }).$promise;
             }
         }
     });

@@ -12,15 +12,21 @@
         li a {
             padding: 20px;
             display: block;
+            transition: background-color 0.3s linear;
         }
 
         li.active a {
             color: #fff;
             background-color: $blue;
         }
+
+        li.unread a {
+            color: #fff;
+            background-color: $red;
+        }
     }
 
-    &-window {
+    &-window, &-groups {
         height: 60vh; overflow: auto;
     }
 

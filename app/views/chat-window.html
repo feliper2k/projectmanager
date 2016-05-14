@@ -1,17 +1,8 @@
-<article class="view__chat-post row">
+<article class="view__chat-post row" ng-repeat="msg in chatwin.messages">
     <div class="col-md-3 post-author">
-        Człowiek 1, 14:20
+        {{ msg.sendername }}, {{ msg.sent | date:'dd/MM/yyyy HH:mm' }}
     </div>
     <div class="col-md-9 post-message">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis qui hic nobis nam mollitia et architecto velit vel quasi, aspernatur. Et fugit at cum dolorem, temporibus ex sit veritatis recusandae.
-    </div>
-</article>
-
-<article class="view__chat-post row">
-    <div class="col-md-3 post-author">
-        Człowiek 1, 14:20
-    </div>
-    <div class="col-md-9 post-message">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis qui hic nobis nam mollitia et architecto velit vel quasi, aspernatur. Et fugit at cum dolorem, temporibus ex sit veritatis recusandae.
+        {{ msg.text }}
     </div>
 </article>
