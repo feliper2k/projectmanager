@@ -17,3 +17,7 @@ body {
 a i.fa {
     margin-right: 10px;
 }
+
+section + section {
+    margin-bottom: 50px;
+}

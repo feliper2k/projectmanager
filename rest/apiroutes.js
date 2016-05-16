@@ -39,5 +39,6 @@ const Users = require('./users')(apiRoutes);
 const Projects = require('./projects')(apiRoutes);
 const Tasks = require('./tasks')(apiRoutes);
 const ChatMessages = require('./messages')(apiRoutes);
+const Files = require('./files')(apiRoutes);
 
 module.exports = apiRoutes;

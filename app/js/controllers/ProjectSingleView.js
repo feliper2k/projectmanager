@@ -1,7 +1,8 @@
 import { find, omit, assign } from 'lodash';
 import toastr                 from 'toastr';
 
-function ProjectsSingleCtrl(ProjectService, UserService, TaskService, $window, $stateParams, $state, $rootScope) {
+function ProjectsSingleCtrl(ProjectService, UserService, TaskService, FileService,
+     $window, $stateParams, $state, $http, $rootScope) {
     'ngInject';
 
     // ViewModel
@@ -13,6 +14,8 @@ function ProjectsSingleCtrl(ProjectService, UserService, TaskService, $window, $
     vm.tasks = TaskService;
     vm.tasksByProject = TaskService.byProject(projectId);
 
+    vm.filesByProject = FileService.query({ id: projectId });
+
     vm.editor = {
         visible: false
     };
@@ -22,6 +25,7 @@ function ProjectsSingleCtrl(ProjectService, UserService, TaskService, $window, $
     };
 
     vm.newItem = {};
+    vm.newFile = null;
 
     vm.actions =  {
         save() {
@@ -45,6 +49,33 @@ function ProjectsSingleCtrl(ProjectService, UserService, TaskService, $window, $
             error => {
                 toastr.error(`Błąd: ${error.message}`);
             });
+        },
+
+        addFile() {
+            FileService.upload({ id: projectId, fileData: vm.newFile }).then(success => {
+                 vm.filesByProject = FileService.query({ id: projectId });
+            }, error => {
+                toastr.error(error);
+            });
+        },
+
+        deleteFile(file) {
+            if(window.confirm('Czy na pewno?')) {
+                FileService.deleteFile(file.id)
+                .then(success => {
+                     vm.filesByProject = FileService.query({ id: projectId });
+                }, error => {
+                    toastr.error(error);
+                });
+            }
+        },
+
+        deleteProject() {
+            if(window.confirm('Czy na pewno?')) {
+                vm.current.$delete(() => {
+                    $state.go('ProjectsList', {}, { reload: true });
+                });
+            }
         }
     }
 }

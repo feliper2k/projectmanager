@@ -40,6 +40,7 @@ app.use('/api', apiRoutes);
 
 // serve build
 app.use(express.static('build'));
+app.use('/uploads', express.static('uploads'));
 
 const server = app.listen(SERVER_PORT, () => {
     const devMode = process.argv.find((opt) => opt === '--dev');

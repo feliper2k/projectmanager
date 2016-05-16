@@ -7,124 +7,173 @@
         <a ui-sref="ProjectsList"><i class="fa fa-chevron-left"></i>Powrót</a>
     </p>
 
-    <div class="row">
-        <section class="view__projects-description col-md-6">
-            <h2>{{ project.current.name }}</h2>
-            <p>{{ project.current.description }}</p>
-        </section>
+    <section>
+        <div class="row">
+            <section class="view__projects-description col-md-6">
+                <h2>{{ project.current.name }}</h2>
+                <p>{{ project.current.description }}</p>
+            </section>
 
-        <section class="view__projects-meta col-md-6">
-            <!-- <div>
-                <i class="fa fa-clock-o"></i> <strong>Czas spędzony nad projektem: </strong> <span ng-bind="">[czas]</span>
-            </div> -->
-            <div class="meta-row">
-                <i class="fa fa-key"></i> <strong>Menedżer projektu: </strong> <span>{{ project.current.ownername }}</span>
-            </div>
-            <div class="meta-row">
-                <i class="fa fa-calendar-o"></i> <strong>Deadline: </strong> <span>{{ project.current.duedate | date:'dd/MM/yyyy HH:mm' }}</span>
-            </div>
-            <!-- <div>
-                <i class="fa fa-clock-o"></i> <strong>Uczestnicy: </strong> <span>...</span> <a href="#">Edytuj...</a>
-            </div> -->
-        </section>
-    </div>
+            <section class="view__projects-meta col-md-6">
+                <!-- <div>
+                    <i class="fa fa-clock-o"></i> <strong>Czas spędzony nad projektem: </strong> <span ng-bind="">[czas]</span>
+                </div> -->
+                <div class="meta-row">
+                    <i class="fa fa-key"></i> <strong>Menedżer projektu: </strong>
+                    <span ng-if="project.current.ownername">{{ project.current.ownername }}</span>
+                    <span ng-if="!project.current.ownername">(brak)</span>
+                </div>
+                <div class="meta-row">
+                    <i class="fa fa-calendar-o"></i> <strong>Deadline: </strong> <span>{{ project.current.duedate | date:'dd/MM/yyyy HH:mm' }}</span>
+                </div>
+                <!-- <div>
+                    <i class="fa fa-clock-o"></i> <strong>Uczestnicy: </strong> <span>...</span> <a href="#">Edytuj...</a>
+                </div> -->
+            </section>
+        </div>
 
-    <div>
-        <button class="btn" ng-click="project.editor.visible = !project.editor.visible"
-        ng-class="{ 'btn-default': project.editor.visible, 'btn-primary': !project.editor.visible }" ng-disabled="!main.tokenData().admin">
-            <i class="fa fa-pencil"></i> Edytuj
-        </button>
-    </div>
+        <div>
+            <button class="btn" ng-click="project.editor.visible = !project.editor.visible"
+            ng-class="{ 'btn-default': project.editor.visible, 'btn-primary': !project.editor.visible }" ng-disabled="!main.tokenData().admin">
+                <i class="fa fa-pencil"></i> Edytuj
+            </button>
 
-    <div ng-if="project.editor.visible">
-        <form ng-submit="project.actions.save()" class="form-horizontal form-add-user">
+            <button class="btn btn-danger" ng-click="project.actions.deleteProject()" ng-disabled="!main.tokenData().admin">
+                <i class="fa fa-times"></i> Usuń
+            </button>
+        </div>
+
+        <div ng-if="project.editor.visible">
+            <form ng-submit="project.actions.save()" class="form-horizontal form-add-user">
+                <div class="form-group">
+                    <label for="newProjectName" class="col-sm-2">Nazwa projektu</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="project.current.name" class="form-control" id="newProjectName" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="newProjectDeadline" class="col-sm-2">Deadline</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="project.current.duedate" class="form-control" id="newProjectDeadline" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="newProjectManager" class="col-sm-2">Zarządzca</label>
+                    <div class="col-sm-10">
+                        <select ng-model="project.current.owner" class="form-control" id="newProjectDescription" required>
+                            <option ng-repeat="owner in project.owners" value="{{ owner.id }}">{{ owner.displayname }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="newProjectDescription" class="col-sm-2">Opis</label>
+                    <div class="col-sm-10">
+                        <textarea ng-model="project.current.description" class="form-control" id="newProjectDescription" required>
+                        </textarea>
+                    </div>
+                </div>
+                <!-- <div class="form-group">
+                    <label for="newProjectDeadline" class="col-sm-2">Deadline</label>
+                    <div class="col-sm-5">
+                        <input type="text" ng-model="project.current.dldate" placeholder="Format: DD/MM/RRRR"
+                         class="form-control" id="newProjectDeadline" pattern="^d{2}/d{2}/d{4}$" required>
+                    </div>
+                    <div class="col-sm-5">
+                        <input type="text" ng-model="project.current.dltime" class="form-control" placeholder="Format: HH:MM" pattern="^d{2}:d{2}$" required>
+                    </div>
+                </div> -->
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button class="btn btn-primary">Zatwierdź</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section>
+        <h2>Zadania</h2>
+
+        <table class="table table-hover" paginated-table data-posts-per-page="8" data-source="project.tasksByProject">
+            <tr>
+                <th>Lp.</th><th>Nazwa</th><th>Kierownik</th><th>Przydzielono</th><th>Opis</th><th>Status</th><th>% wykonania</th>
+            </tr>
+            <tr ng-repeat="task in table.posts">
+                <td>{{ $index+1 }}</td>
+                <td><a ui-sref="TasksSingle({ id: task.id })">{{ task.name }}</a></td>
+                <td>{{ task.assignername }}</td>
+                <td>{{ task.assigneename }}</td>
+                <td>{{ task.description }}</td>
+                <td>{{ task.status | taskstatus }}</td>
+                <td>{{ task.progress }}%</td>
+            </tr>
+        </table>
+        <div>
+            <button class="btn" ng-click="project.addForm.visible = !project.addForm.visible" ng-disabled="!main.tokenData().admin"
+            ng-class="{ 'btn-default': project.addForm.visible, 'btn-primary': !project.addForm.visible }">Dodaj zadanie</button>
+        </div>
+        <div ng-if="project.addForm.visible">
+            <form ng-submit="project.actions.addItem()" class="form-horizontal form-add-user">
+                <div class="form-group">
+                    <label for="newTaskName" class="col-sm-2">Nazwa zadania</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="project.newItem.name" class="form-control" id="newProjectName" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="newTaskDescription" class="col-sm-2">Opis</label>
+                    <div class="col-sm-10">
+                        <textarea ng-model="project.newItem.description" class="form-control" id="newProjectDescription" required>
+                        </textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="newTaskAssignee" class="col-sm-2">Przydziel do</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" id="newTaskAssignee" ng-model="project.newItem.assignee">
+                            <option ng-repeat="user in project.owners" value="{{ user.id }}">{{ user.displayname }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button class="btn btn-primary" type="submit">Zatwierdź</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section>
+        <h2>Załączniki</h2>
+
+        <table class="table table-hover">
+            <tr>
+                <th>Lp.</th><th>Nazwa</th><th>Autor</th><th>Przesłano</th><th>Typ</th><th>Rozmiar</th><th>Akcje</th>
+            </tr>
+            <tr ng-repeat="file in project.filesByProject">
+                <td>{{ $index+1 }}</td>
+                <td><a href="/{{ file.meta.path }}">{{ file.name }}</a></td>
+                <td>{{ file.authorname }}</td>
+                <td>{{ file.uploaded | date:'dd/MM/yyyy HH:mm' }}</td>
+                <td>{{ file.meta.mimetype }}</td>
+                <td>{{ file.meta.size | filesize }}</td>
+                <td>
+                    <button class="btn btn-danger" ng-click="project.actions.deleteFile(file)" ng-disabled="!main.tokenData().admin">
+                        <i class="fa fa-times"></i> Usuń
+                    </button>
+                </td>
+            </tr>
+        </table>
+
+        <form ng-submit="project.actions.addFile()" class="form-horizontal form-add-user" ng-if="main.tokenData().admin">
             <div class="form-group">
-                <label for="newProjectName" class="col-sm-2">Nazwa projektu</label>
+                <label for="newTaskName" class="col-sm-2">Dodaj załącznik...</label>
                 <div class="col-sm-10">
-                    <input type="text" ng-model="project.current.name" class="form-control" id="newProjectName" required>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="newProjectManager" class="col-sm-2">Zarządzca</label>
-                <div class="col-sm-10">
-                    <select ng-model="project.current.owner" class="form-control" id="newProjectDescription" required>
-                        <option ng-repeat="owner in project.owners" value="{{ owner.id }}">{{ owner.displayname }}</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="newProjectDescription" class="col-sm-2">Opis</label>
-                <div class="col-sm-10">
-                    <textarea ng-model="project.current.description" class="form-control" id="newProjectDescription" required>
-                    </textarea>
-                </div>
-            </div>
-            <!-- <div class="form-group">
-                <label for="newProjectDeadline" class="col-sm-2">Deadline</label>
-                <div class="col-sm-5">
-                    <input type="text" ng-model="project.current.dldate" placeholder="Format: DD/MM/RRRR"
-                     class="form-control" id="newProjectDeadline" pattern="^d{2}/d{2}/d{4}$" required>
-                </div>
-                <div class="col-sm-5">
-                    <input type="text" ng-model="project.current.dltime" class="form-control" placeholder="Format: HH:MM" pattern="^d{2}:d{2}$" required>
-                </div>
-            </div> -->
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button class="btn btn-primary">Zatwierdź</button>
+                    <input type="file" file-selector="project.newFile" class="form-control" name="fileData">
+                    <button class="btn btn-primary" style="margin-top: 10px;">Załącz</button>
                 </div>
             </div>
         </form>
-    </div>
-
-    <h2>Zadania</h2>
-
-    <table class="table table-hover" paginated-table data-posts-per-page="8" data-source="project.tasksByProject">
-        <tr>
-            <th>Lp.</th><th>Nazwa</th><th>Kierownik</th><th>Przydzielono</th><th>Opis</th><th>Status</th><th>% wykonania</th>
-        </tr>
-        <tr ng-repeat="task in table.posts">
-            <td>{{ $index+1 }}</td>
-            <td><a ui-sref="TasksSingle({ id: task.id })">{{ task.name }}</a></td>
-            <td>{{ task.assignername }}</td>
-            <td>{{ task.assigneename }}</td>
-            <td>{{ task.description }}</td>
-            <td>{{ task.status | taskstatus }}</td>
-            <td>{{ task.progress }}%</td>
-        </tr>
-    </table>
-    <div>
-        <button class="btn" ng-click="project.addForm.visible = !project.addForm.visible" ng-disabled="!main.tokenData().admin"
-        ng-class="{ 'btn-default': project.addForm.visible, 'btn-primary': !project.addForm.visible }">Dodaj zadanie</button>
-    </div>
-    <div ng-if="project.addForm.visible">
-        <form ng-submit="project.actions.addItem()" class="form-horizontal form-add-user">
-            <div class="form-group">
-                <label for="newTaskName" class="col-sm-2">Nazwa zadania</label>
-                <div class="col-sm-10">
-                    <input type="text" ng-model="project.newItem.name" class="form-control" id="newProjectName" required>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="newTaskDescription" class="col-sm-2">Opis</label>
-                <div class="col-sm-10">
-                    <textarea ng-model="project.newItem.description" class="form-control" id="newProjectDescription" required>
-                    </textarea>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="newTaskAssignee" class="col-sm-2">Przydziel do</label>
-                <div class="col-sm-10">
-                    <select class="form-control" id="newTaskAssignee" ng-model="project.newItem.assignee">
-                        <option ng-repeat="user in project.owners" value="{{ user.id }}">{{ user.displayname }}</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button class="btn btn-primary" type="submit">Zatwierdź</button>
-                </div>
-            </div>
-        </form>
-    </div>
+    </section>
 </div>

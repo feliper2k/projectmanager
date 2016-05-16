@@ -1,0 +1,720 @@
+
+
+*******************************************************************************
+Mon Feb 22 19:32:27 2016
+
+
+FIT:    data read from 'sinx-with-errors.csv' using 1:2
+        format = x:z
+        #datapoints = 51
+        residuals are weighted equally (unit weight)
+
+function used for fitting: a*sin(x)+b
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 67.1629           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 0.875939
+
+initial set of free parameter values
+
+a               = 1
+b               = 1
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 13.2855
+rel. change during last iteration : -3.82237e-11
+
+degrees of freedom    (FIT_NDF)                        : 49
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.520704
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.271133
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 0.597533         +/- 0.09973      (16.69%)
+b               = 0.0151976        +/- 0.07291      (479.8%)
+
+
+correlation matrix of the fit parameters:
+
+               a      b      
+a               1.000 
+b               0.000  1.000 
+
+
+*******************************************************************************
+Mon Feb 22 19:33:39 2016
+
+
+FIT:    data read from 'sinx-with-errors.csv' using 1:2
+        format = x:z
+        #datapoints = 51
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 13.2855           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 0.875939
+
+initial set of free parameter values
+
+a               = 0.597533
+b               = 0.0151976
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 13.2855
+rel. change during last iteration : -1.33706e-16
+
+degrees of freedom    (FIT_NDF)                        : 49
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.520704
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.271133
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 0.597533         +/- 0.09973      (16.69%)
+b               = 0.0151976        +/- 0.07291      (479.8%)
+
+
+correlation matrix of the fit parameters:
+
+               a      b      
+a               1.000 
+b              -0.000  1.000 
+
+
+*******************************************************************************
+Mon Feb 22 20:11:04 2016
+
+
+FIT:    data read from 'sinx-with-errors.csv' using 1:2
+        format = x:z
+        #datapoints = 51
+        residuals are weighted equally (unit weight)
+
+function used for fitting: a*sin(b*x+c)+d
+
+
+*******************************************************************************
+Mon Feb 22 20:11:12 2016
+
+
+FIT:    data read from 'sinx-with-errors.csv' using 1:2
+        format = x:z
+        #datapoints = 51
+        residuals are weighted equally (unit weight)
+
+function used for fitting: a*sin(b*x+c)+d
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 37.3436           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1.30146
+
+initial set of free parameter values
+
+a               = 1
+b               = 1
+c               = 1
+d               = 1
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 1.4304
+rel. change during last iteration : -3.49007e-10
+
+degrees of freedom    (FIT_NDF)                        : 47
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.174454
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.030434
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 0.944165         +/- 0.03569      (3.781%)
+b               = 1.03679          +/- 0.01246      (1.201%)
+c               = 0.897817         +/- 0.03683      (4.102%)
+d               = 0.132566         +/- 0.02592      (19.55%)
+
+
+correlation matrix of the fit parameters:
+
+               a      b      c      d      
+a               1.000 
+b              -0.031  1.000 
+c               0.112  0.012  1.000 
+d               0.194 -0.245  0.149  1.000 
+
+
+*******************************************************************************
+Mon Feb 22 20:35:03 2016
+
+
+FIT:    data read from 'sinx-with-errors.csv' using 1:2
+        format = x:z
+        #datapoints = 51
+        residuals are weighted equally (unit weight)
+
+function used for fitting: sin(x+a)+b
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 37.3436           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 0.870174
+
+initial set of free parameter values
+
+a               = 1
+b               = 1
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 1.75858
+rel. change during last iteration : -7.30374e-06
+
+degrees of freedom    (FIT_NDF)                        : 49
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.189445
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.0358893
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 0.888465         +/- 0.03774      (4.248%)
+b               = 0.156321         +/- 0.02688      (17.19%)
+
+
+correlation matrix of the fit parameters:
+
+               a      b      
+a               1.000 
+b               0.161  1.000 
+
+
+*******************************************************************************
+Mon Feb 22 20:36:05 2016
+
+
+FIT:    data read from 'sinx-with-errors.csv' using 1:2
+        format = x:z
+        #datapoints = 51
+        residuals are weighted equally (unit weight)
+
+function used for fitting: sin(x+a)+b
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 37.3436           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 0.870174
+
+initial set of free parameter values
+
+a               = 1
+b               = 1
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 1.75858
+rel. change during last iteration : -7.30374e-06
+
+degrees of freedom    (FIT_NDF)                        : 49
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.189445
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.0358893
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 0.888465         +/- 0.03774      (4.248%)
+b               = 0.156321         +/- 0.02688      (17.19%)
+
+
+correlation matrix of the fit parameters:
+
+               a      b      
+a               1.000 
+b               0.161  1.000 
+
+
+*******************************************************************************
+Mon Feb 22 20:40:29 2016
+
+
+FIT:    data read from 'sinx-with-errors.csv' using 1:2
+        format = x:z
+        #datapoints = 51
+        residuals are weighted equally (unit weight)
+
+function used for fitting: sin(x+a)+b
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 37.3436           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 0.870174
+
+initial set of free parameter values
+
+a               = 1
+b               = 1
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 1.75858
+rel. change during last iteration : -7.30374e-06
+
+degrees of freedom    (FIT_NDF)                        : 49
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.189445
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.0358893
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 0.888465         +/- 0.03774      (4.248%)
+b               = 0.156321         +/- 0.02688      (17.19%)
+
+
+correlation matrix of the fit parameters:
+
+               a      b      
+a               1.000 
+b               0.161  1.000 
+
+
+*******************************************************************************
+Mon Feb 22 20:40:51 2016
+
+
+FIT:    data read from 'sinx-with-errors.csv' using 1:2
+        format = x:z
+        #datapoints = 51
+        residuals are weighted equally (unit weight)
+
+function used for fitting: sin(x+a)+b
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 37.3436           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 0.870174
+
+initial set of free parameter values
+
+a               = 1
+b               = 1
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 1.75858
+rel. change during last iteration : -7.30374e-06
+
+degrees of freedom    (FIT_NDF)                        : 49
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.189445
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.0358893
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 0.888465         +/- 0.03774      (4.248%)
+b               = 0.156321         +/- 0.02688      (17.19%)
+
+
+correlation matrix of the fit parameters:
+
+               a      b      
+a               1.000 
+b               0.161  1.000 
+
+
+*******************************************************************************
+Mon Feb 22 20:48:01 2016
+
+
+FIT:    data read from 'sinx-with-errors.csv' using 1:2
+        format = x:z
+        #datapoints = 51
+        residuals are weighted equally (unit weight)
+
+function used for fitting: sin(x+a)+b
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 37.3436           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 0.870174
+
+initial set of free parameter values
+
+a               = 1
+b               = 1
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 1.75858
+rel. change during last iteration : -7.30374e-06
+
+degrees of freedom    (FIT_NDF)                        : 49
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.189445
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.0358893
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 0.888465         +/- 0.03774      (4.248%)
+b               = 0.156321         +/- 0.02688      (17.19%)
+
+
+correlation matrix of the fit parameters:
+
+               a      b      
+a               1.000 
+b               0.161  1.000 
+
+
+*******************************************************************************
+Mon Feb 22 20:48:17 2016
+
+
+FIT:    data read from 'sinx-with-errors.csv' using 1:2
+        format = x:z
+        #datapoints = 51
+        residuals are weighted equally (unit weight)
+
+function used for fitting: sin(x+a)+b
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 37.3436           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 0.870174
+
+initial set of free parameter values
+
+a               = 1
+b               = 1
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 1.75858
+rel. change during last iteration : -7.30374e-06
+
+degrees of freedom    (FIT_NDF)                        : 49
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.189445
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.0358893
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 0.888465         +/- 0.03774      (4.248%)
+b               = 0.156321         +/- 0.02688      (17.19%)
+
+
+correlation matrix of the fit parameters:
+
+               a      b      
+a               1.000 
+b               0.161  1.000 
+
+
+*******************************************************************************
+Mon Feb 22 20:48:34 2016
+
+
+FIT:    data read from 'sinx-with-errors.csv' using 1:2
+        format = x:z
+        #datapoints = 51
+        residuals are weighted equally (unit weight)
+
+function used for fitting: sin(x+a)+b
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 37.3436           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 0.870174
+
+initial set of free parameter values
+
+a               = 1
+b               = 1
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 1.75858
+rel. change during last iteration : -7.30374e-06
+
+degrees of freedom    (FIT_NDF)                        : 49
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.189445
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.0358893
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 0.888465         +/- 0.03774      (4.248%)
+b               = 0.156321         +/- 0.02688      (17.19%)
+
+
+correlation matrix of the fit parameters:
+
+               a      b      
+a               1.000 
+b               0.161  1.000 
+
+
+*******************************************************************************
+Mon Feb 22 20:49:04 2016
+
+
+FIT:    data read from 'sinx-with-errors.csv' using 1:2
+        format = x:z
+        #datapoints = 51
+        residuals are weighted equally (unit weight)
+
+function used for fitting: sin(x+a)+b
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 37.3436           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 0.870174
+
+initial set of free parameter values
+
+a               = 1
+b               = 1
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 1.75858
+rel. change during last iteration : -7.30374e-06
+
+degrees of freedom    (FIT_NDF)                        : 49
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.189445
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.0358893
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 0.888465         +/- 0.03774      (4.248%)
+b               = 0.156321         +/- 0.02688      (17.19%)
+
+
+correlation matrix of the fit parameters:
+
+               a      b      
+a               1.000 
+b               0.161  1.000 
+
+
+*******************************************************************************
+Mon Feb 22 20:52:32 2016
+
+
+FIT:    data read from 'sinx-with-errors.csv' using 1:2
+        format = x:z
+        #datapoints = 51
+        residuals are weighted equally (unit weight)
+
+function used for fitting: a*sin(x+b)+c
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 37.3436           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 0.816503
+
+initial set of free parameter values
+
+a               = 1
+b               = 1
+c               = 1
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 1.67268
+rel. change during last iteration : -9.99723e-08
+
+degrees of freedom    (FIT_NDF)                        : 48
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.186675
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.0348474
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 0.940026         +/- 0.03819      (4.062%)
+b               = 0.881938         +/- 0.03981      (4.514%)
+c               = 0.147151         +/- 0.02712      (18.43%)
+
+
+correlation matrix of the fit parameters:
+
+               a      b      c      
+a               1.000 
+b               0.104  1.000 
+c               0.214  0.180  1.000 
+
+
+*******************************************************************************
+Mon Feb 22 21:05:51 2016
+
+
+FIT:    data read from 'sinx-with-errors.csv' using 1:2
+        format = x:z
+        #datapoints = 51
+        residuals are weighted equally (unit weight)
+
+function used for fitting: a*sin(x+b)+c
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 37.3436           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 0.816503
+
+initial set of free parameter values
+
+a               = 1
+b               = 1
+c               = 1
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 1.67268
+rel. change during last iteration : -9.99723e-08
+
+degrees of freedom    (FIT_NDF)                        : 48
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.186675
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.0348474
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 0.940026         +/- 0.03819      (4.062%)
+b               = 0.881938         +/- 0.03981      (4.514%)
+c               = 0.147151         +/- 0.02712      (18.43%)
+
+
+correlation matrix of the fit parameters:
+
+               a      b      c      
+a               1.000 
+b               0.104  1.000 
+c               0.214  0.180  1.000 
+
+
+*******************************************************************************
+Mon Feb 22 21:07:13 2016
+
+
+FIT:    data read from 'sinx-with-errors.csv' using 1:2
+        format = x:z
+        #datapoints = 51
+        residuals are weighted equally (unit weight)
+
+function used for fitting: a*sin(x+b)+c
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 37.3436           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 0.816503
+
+initial set of free parameter values
+
+a               = 1
+b               = 1
+c               = 1
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 1.67268
+rel. change during last iteration : -9.99723e-08
+
+degrees of freedom    (FIT_NDF)                        : 48
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.186675
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.0348474
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 0.940026         +/- 0.03819      (4.062%)
+b               = 0.881938         +/- 0.03981      (4.514%)
+c               = 0.147151         +/- 0.02712      (18.43%)
+
+
+correlation matrix of the fit parameters:
+
+               a      b      c      
+a               1.000 
+b               0.104  1.000 
+c               0.214  0.180  1.000 
+
+
+*******************************************************************************
+Mon Feb 22 23:00:40 2016
+
+
+FIT:    data read from 'sinx-with-errors.csv' using 1:2
+        format = x:z
+        #datapoints = 51
+        residuals are weighted equally (unit weight)
+
+function used for fitting: a*sin(x+b)+c
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 37.3436           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 0.816503
+
+initial set of free parameter values
+
+a               = 1
+b               = 1
+c               = 1
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 1.67268
+rel. change during last iteration : -9.99723e-08
+
+degrees of freedom    (FIT_NDF)                        : 48
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.186675
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.0348474
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 0.940026         +/- 0.03819      (4.062%)
+b               = 0.881938         +/- 0.03981      (4.514%)
+c               = 0.147151         +/- 0.02712      (18.43%)
+
+
+correlation matrix of the fit parameters:
+
+               a      b      c      
+a               1.000 
+b               0.104  1.000 
+c               0.214  0.180  1.000 

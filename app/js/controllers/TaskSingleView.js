@@ -43,7 +43,7 @@ function TasksSingleCtrl(ProjectService, UserService, TaskService, $window, $sta
         deleteTask() {
             if(window.confirm('Czy na pewno?')) {
                 vm.current.$delete(() => {
-                    $state.go('ProjectSingle', { id: vm.current.project }, { reload: true });
+                    $state.go('ProjectsSingle', { id: vm.current.project }, { reload: true });
                 });
             }
         }
